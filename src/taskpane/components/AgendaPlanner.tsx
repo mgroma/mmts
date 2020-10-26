@@ -1,5 +1,13 @@
-import {DefaultButton, IContextualMenuProps, IStackTokens, Stack} from "office-ui-fabric-react"
+import {
+    DefaultButton,
+    IButtonProps,
+    IContextualMenuProps,
+    IStackTokens,
+    Stack,
+    TeachingBubble
+} from "office-ui-fabric-react"
 import React = require("react")
+import {useBoolean} from '@uifabric/react-hooks';
 
 export interface IButtonExampleProps {
     // These are set based on the toggles shown above the examples (not needed in real code)
@@ -25,22 +33,41 @@ const menuProps: IContextualMenuProps = {
         },
     ],
 };
+const examplePrimaryButtonProps: IButtonProps = {
+    children: 'Try it out',
+};
 export const AgendaPlanner: React.FunctionComponent<IButtonExampleProps> = (props: IButtonExampleProps) => {
     const {checked} = props;
     // Example formatting
     const stackTokens: IStackTokens = {childrenGap: 20, padding: 10};
+    const [teachingBubbleVisible, {toggle: toggleTeachingBubbleVisible}] = useBoolean(false);
+    const exampleSecondaryButtonProps: IButtonProps = React.useMemo(
+        () => ({
+            children: 'Maybe later',
+            onClick: toggleTeachingBubbleVisible,
+        }),
+        [toggleTeachingBubbleVisible],
+    );
     return (
         <div>
             <Stack horizontal wrap tokens={stackTokens}>
                 <DefaultButton
-                    text="Standard"
-                    split
-                    splitButtonAriaLabel="See 2 options"
-                    aria-roledescription="split button"
-                    menuProps={menuProps}
-                    onClick={_alertClicked}
-                    checked={checked}
+                    id="targetButton"
+                    onClick={toggleTeachingBubbleVisible}
+                    text={teachingBubbleVisible ? 'Hide TeachingBubble' : 'Show TeachingBubble'}
                 />
+                {teachingBubbleVisible && (
+                    <TeachingBubble
+                        target="#targetButton"
+                        primaryButtonProps={examplePrimaryButtonProps}
+                        secondaryButtonProps={exampleSecondaryButtonProps}
+                        onDismiss={toggleTeachingBubbleVisible}
+                        headline="Discover what’s trending around you"
+                    >
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere, nulla, ipsum? Molestiae quis aliquam magni
+                        harum non?
+                    </TeachingBubble>
+                )}
                 <DefaultButton
                     text="Primary"
                     primary
