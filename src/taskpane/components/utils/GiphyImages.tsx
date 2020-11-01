@@ -1,17 +1,16 @@
-import {IImageProps, Image, Label, Rating, RatingSize} from "office-ui-fabric-react";
+import {IImageProps, Image, Label, Rating, RatingSize, TextField} from "office-ui-fabric-react";
 import {useState} from "react";
 import * as React from "react";
-import { getTheme } from '@fluentui/react';
+import {getTheme} from '@fluentui/react';
 import {DefaultEffects, NeutralColors} from "@fluentui/theme";
-import GiphyImages from "./GiphyImages";
 
 interface MemeImageProps {
     name: string,
     url: string
 }
 
-const MemeImageAndRating = () => {
-    const [largeStarRating, setLargeStarsRating] = React.useState(1);
+const GiphyImages = () => {
+    const [searchTerm, setSearchTerm] = React.useState('business');
     const [memeImageProps, setMemeImageProps] = useState<MemeImageProps>({
         name: '',
         url: 'http://placehold.it/700x300'
@@ -29,11 +28,14 @@ const MemeImageAndRating = () => {
     }
 
     const getNewMeme = async () => {
-        const response = await fetch('https://api.imgflip.com/get_memes');
+        const response = await fetch(`https://api.giphy.com/v1/gifs/search?api_key=dc6zaTOxFJmzC&limit=10&q=${encodeURIComponent(searchTerm)}`);
         const json = await response.json();
         // setConsole(`meme response= ${response}, json=${JSON.stringify(json)}`)
-        const index = Math.floor((Math.random() * json.data.memes.length) + 1)
-        const {name, url} = json.data.memes[index]
+        const resultsLength = json.data.length;
+        if (resultsLength === 0) return;
+        const index = Math.floor((Math.random() * resultsLength) + 1)
+        const url = json.data[index].images.original.url;
+        const name = json.data[index].title;
         setMemeImageProps({name, url});
     };
 
@@ -42,27 +44,20 @@ const MemeImageAndRating = () => {
             boxShadow: DefaultEffects.elevation4,
             padding: 15,
             backgroundColor: NeutralColors.white
-        }} >
+        }}>
             <Image {...styleProps()}
                    src={memeImageProps.url}
                    alt={memeImageProps.name}
                    onClick={getNewMeme}
             />
             <Label>{memeImageProps.name}</Label>
-            {/* eslint-disable-next-line react/jsx-no-undef */}
-            <Label>Rate this meeting</Label>
-            <Rating
-                min={1}
-                max={5}
-                size={RatingSize.Large}
-                rating={largeStarRating}
-                onChange={(_ev, rating) => setLargeStarsRating(rating)}
-                ariaLabelFormat={'Select {0} of {1} stars'}
+            <TextField
+                label={'Enter search term'}
+                onChange={(_ent, newValue) => setSearchTerm(newValue)}
             />
-            <GiphyImages />
         </div>
 
     )
 }
 
-export default MemeImageAndRating;
+export default GiphyImages;
