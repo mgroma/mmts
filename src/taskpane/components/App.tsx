@@ -1,8 +1,5 @@
 import * as React from "react";
-import { Button, ButtonType, DefaultButton } from "office-ui-fabric-react";
-import Header from "./Header";
-import HeroList, { HeroListItem } from "./HeroList";
-import Progress from "./Progress";
+import { HeroListItem } from "./HeroList";
 // images references in the manifest
 import "../../../assets/icon-16.png";
 import "../../../assets/icon-32.png";
@@ -53,12 +50,11 @@ export default class App extends React.Component<AppProps, AppState> {
   };
 
   render() {
-    const { title, isOfficeInitialized } = this.props;
+    const { isOfficeInitialized } = this.props;
 
     if (!isOfficeInitialized) {
       return (
           <div>
-        <Progress title={title} logo="assets/logo-filled.png" message="Please sideload your addin to see app body." />
         <Main />
           </div>
       );
@@ -66,22 +62,7 @@ export default class App extends React.Component<AppProps, AppState> {
 
     return (
       <div className="ms-welcome">
-        <Header logo="assets/logo-filled.png" title={this.props.title} message="Welcome" />
-        <HeroList message="Discover what Office Add-ins can do for you today!" items={this.state.listItems}>
-          <p className="ms-font-l">
-            Modify the source files, then click <b>Run</b>.
-          </p>
-          <DefaultButton
-          >i'm default button who are you?</DefaultButton>
-          <Button
-            className="ms-welcome__action"
-            buttonType={ButtonType.hero}
-            iconProps={{ iconName: "ChevronRight" }}
-            onClick={this.click}
-          >
-            Run
-          </Button>
-        </HeroList>
+        <Main />
       </div>
     );
   }

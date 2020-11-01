@@ -2,9 +2,9 @@
 <OfficeApp xmlns="http://schemas.microsoft.com/office/appforoffice/1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0" xmlns:mailappor="http://schemas.microsoft.com/office/mailappversionoverrides/1.0" xsi:type="MailApp">
   <Id>7f2c9eb3-cb76-411c-89ca-e912b5da9578</Id>
   <Version>1.0.0.0</Version>
-  <ProviderName>Meeting Machine</ProviderName>
+  <ProviderName>Meeting Machine TS</ProviderName>
   <DefaultLocale>en-US</DefaultLocale>
-  <DisplayName DefaultValue="Meeting Machine Inc"/>
+  <DisplayName DefaultValue="Meeting Machine TS"/>
   <Description DefaultValue="Helps to organize meetings"/>
   <IconUrl DefaultValue="https://localhost:3300/assets/icon-32.png"/>
   <HighResolutionIconUrl DefaultValue="https://localhost:3300/assets/icon-80.png"/>

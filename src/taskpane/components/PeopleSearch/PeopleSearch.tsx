@@ -1,8 +1,9 @@
 import * as React from 'react';
-import { Checkbox } from '@fluentui/react/lib/Checkbox';
-import { IPersonaProps } from '@fluentui/react/lib/Persona';
-import { IBasePickerSuggestionsProps, NormalPeoplePicker, ValidationState } from '@fluentui/react/lib/Pickers';
-import { people, mru } from '@uifabric/example-data';
+import {Checkbox} from '@fluentui/react/lib/Checkbox';
+import {IPersonaProps} from '@fluentui/react/lib/Persona';
+import {IBasePickerSuggestionsProps, NormalPeoplePicker, ValidationState} from '@fluentui/react/lib/Pickers';
+import {mru, people} from '@uifabric/example-data';
+import {PersonaPresence} from "office-ui-fabric-react";
 
 const suggestionProps: IBasePickerSuggestionsProps = {
     suggestionsHeaderText: 'Suggested People',
@@ -103,11 +104,13 @@ export const PeopleSearch: React.FunctionComponent = () => {
                 onValidateInput={validateInput}
                 removeButtonAriaLabel={'Remove'}
                 inputProps={{
-                    onBlur: (env) => console.log('onBlur called'+ env),
+                    onBlur: (env) => console.log('onBlur called' + env),
                     onFocus: () => console.log('onFocus called'),
+                    onClick: (e) => console.log(`onclick e=${e}`),
                     'aria-label': 'People Picker',
                 }}
                 componentRef={picker}
+                onItemSelected={onItemSelected}
                 onInputChange={onInputChange}
                 resolveDelay={300}
                 disabled={isPickerDisabled}
@@ -179,4 +182,16 @@ function onInputChange(input: string): string {
     }
 
     return input;
+}
+
+function onItemSelected(item: IPersonaProps): Promise<IPersonaProps> {
+    const processedItem = {...item};
+    processedItem.text = `${item.text}`;
+    processedItem.presence = PersonaPresence.offline
+    processedItem.onClick = (_ev) => {
+        console.log(`onClick= ${_ev}`)
+        processedItem.presence = PersonaPresence.online;
+        // processedItem.presence = processedItem.presence === PersonaPresence.online ? PersonaPresence.offline : PersonaPresence.online;
+    }
+    return new Promise<IPersonaProps>((resolve, _reject) => setTimeout(() => resolve(processedItem), 250));
 }

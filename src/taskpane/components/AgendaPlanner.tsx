@@ -1,13 +1,16 @@
 import {
+    StackItem,
     DefaultButton,
     IButtonProps,
-    IContextualMenuProps,
     IStackTokens,
     Stack,
     TeachingBubble
 } from "office-ui-fabric-react"
 import React = require("react")
 import {useBoolean} from '@uifabric/react-hooks';
+import {useState} from "react";
+import ProgressBar from "./utils/Progress";
+import MemeImageAndRating from "./utils/MemeImageAndRating";
 
 export interface IButtonExampleProps {
     // These are set based on the toggles shown above the examples (not needed in real code)
@@ -15,32 +18,15 @@ export interface IButtonExampleProps {
     checked?: boolean;
 }
 
-const _alertClicked = () => {
-    alert('alertclicked')
-};
-
-const menuProps: IContextualMenuProps = {
-    items: [
-        {
-            key: 'emailMessage',
-            text: 'Email message',
-            iconProps: {iconName: 'Mail'},
-        },
-        {
-            key: 'calendarEvent',
-            text: 'Calendar event',
-            iconProps: {iconName: 'Calendar'},
-        },
-    ],
-};
 const examplePrimaryButtonProps: IButtonProps = {
     children: 'Try it out',
 };
 export const AgendaPlanner: React.FunctionComponent<IButtonExampleProps> = (props: IButtonExampleProps) => {
     const {checked} = props;
     // Example formatting
-    const stackTokens: IStackTokens = {childrenGap: 20, padding: 10};
+    const stackTokens: IStackTokens = {childrenGap: 20, padding: 20};
     const [teachingBubbleVisible, {toggle: toggleTeachingBubbleVisible}] = useBoolean(false);
+    const [console, setConsole] = useState('console');
     const exampleSecondaryButtonProps: IButtonProps = React.useMemo(
         () => ({
             children: 'Maybe later',
@@ -48,8 +34,34 @@ export const AgendaPlanner: React.FunctionComponent<IButtonExampleProps> = (prop
         }),
         [toggleTeachingBubbleVisible],
     );
+
+    const openPopup = () => {
+        setConsole('openPopup');
+    };
+
+    const consoleStyles = {
+        root: {
+            border: '1px solid grey',
+            padding: '10px'
+        }
+    };
+
+
+    /*
+        const getProgressStyle  = () => {
+            const color = SharedColors.red10
+            const styles = {
+                root: {
+                    background: color
+                }
+            }
+            return styles;
+        };
+    */
+
     return (
         <div>
+            <ProgressBar/>
             <Stack horizontal wrap tokens={stackTokens}>
                 <DefaultButton
                     id="targetButton"
@@ -64,43 +76,22 @@ export const AgendaPlanner: React.FunctionComponent<IButtonExampleProps> = (prop
                         onDismiss={toggleTeachingBubbleVisible}
                         headline="Discover what’s trending around you"
                     >
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere, nulla, ipsum? Molestiae quis aliquam magni
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere, nulla, ipsum? Molestiae quis
+                        aliquam magni
                         harum non?
                     </TeachingBubble>
                 )}
                 <DefaultButton
-                    text="Primary"
-                    primary
-                    split
+                    text="Open Popup"
                     splitButtonAriaLabel="See 2 options"
                     aria-roledescription="split button"
-                    menuProps={menuProps}
-                    onClick={_alertClicked}
+                    onClick={openPopup}
                     checked={checked}
                 />
-                <DefaultButton
-                    text="Main action disabled"
-                    primaryDisabled
-                    split
-                    splitButtonAriaLabel="See 2 options"
-                    aria-roledescription="split button"
-                    menuProps={menuProps}
-                    onClick={_alertClicked}
-                    checked={checked}
-                />
-                <DefaultButton
-                    text="Disabled"
-                    disabled
-                    allowDisabledFocus
-                    split
-                    splitButtonAriaLabel="See 2 options"
-                    aria-roledescription="split button"
-                    menuProps={menuProps}
-                    onClick={_alertClicked}
-                    checked={checked}
-                />
+                <StackItem styles={consoleStyles}>{console}</StackItem>
             </Stack>
             <div>
+                <MemeImageAndRating />
                 Find a Person...
             </div>
         </div>

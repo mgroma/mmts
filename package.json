@@ -27,12 +27,13 @@
     "watch": "webpack --mode development --watch"
   },
   "dependencies": {
+    "@fluentui/react": "^7.147.1",
+    "@fluentui/theme": "^1.5.4",
     "core-js": "^3.1.4",
     "es6-promise": "^4.2.8",
     "office-ui-fabric-react": "^7.10.0",
     "react": "^16.8.2",
-    "react-dom": "^16.8.2",
-    "@fluentui/react": "^7.147.1"
+    "react-dom": "^16.8.2"
   },
   "devDependencies": {
     "@babel/core": "^7.10.2",
