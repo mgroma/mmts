@@ -4,7 +4,13 @@ import { AppContainer } from "react-hot-loader";
 import { initializeIcons } from "office-ui-fabric-react/lib/Icons";
 import * as React from "react";
 import * as ReactDOM from "react-dom";
+import { createStore } from "redux";
+import { reducer } from './components/todo/reducers';
+import {composeWithDevTools} from "redux-devtools-extension";
+import { Provider } from "react-redux";
+
 /* global AppCpntainer, Component, document, Office, module, require */
+const store = createStore(reducer, {}, composeWithDevTools());
 
 initializeIcons();
 
@@ -14,9 +20,9 @@ const title = "Meeting Machine";
 
 const render = Component => {
   ReactDOM.render(
-    <AppContainer>
+      <Provider store={store}>
       <Component title={title} isOfficeInitialized={isOfficeInitialized} />
-    </AppContainer>,
+      </Provider>,
     document.getElementById("container")
   );
 };

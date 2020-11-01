@@ -1,6 +1,8 @@
 import {IImageProps, Image, Label, Rating, RatingSize} from "office-ui-fabric-react";
 import {useState} from "react";
 import * as React from "react";
+import { getTheme } from '@fluentui/react';
+import {DefaultEffects, NeutralColors} from "@fluentui/theme";
 
 interface MemeImageProps {
     name: string,
@@ -14,6 +16,8 @@ const MemeImageAndRating = () => {
         url: 'http://placehold.it/700x300'
     });
 
+    const theme = getTheme();
+    console.log(`theme=${JSON.stringify(theme)}`)
     const styleProps = () => {
         const imageProps: IImageProps = {
             // imageFit: ImageFit.centerContain,
@@ -33,7 +37,11 @@ const MemeImageAndRating = () => {
     };
 
     return (
-        <div>
+        <div style={{
+            boxShadow: DefaultEffects.elevation4,
+            padding: 15,
+            backgroundColor: NeutralColors.white
+        }} >
             <Image {...styleProps()}
                    src={memeImageProps.url}
                    alt={memeImageProps.name}

@@ -11,6 +11,7 @@ import {useBoolean} from '@uifabric/react-hooks';
 import {useState} from "react";
 import ProgressBar from "./utils/Progress";
 import MemeImageAndRating from "./utils/MemeImageAndRating";
+import {NeutralColors} from "@fluentui/theme";
 
 export interface IButtonExampleProps {
     // These are set based on the toggles shown above the examples (not needed in real code)
@@ -24,7 +25,7 @@ const examplePrimaryButtonProps: IButtonProps = {
 export const AgendaPlanner: React.FunctionComponent<IButtonExampleProps> = (props: IButtonExampleProps) => {
     const {checked} = props;
     // Example formatting
-    const stackTokens: IStackTokens = {childrenGap: 20, padding: 20};
+    const stackTokens: IStackTokens = {childrenGap: 20, padding: 10};
     const [teachingBubbleVisible, {toggle: toggleTeachingBubbleVisible}] = useBoolean(false);
     const [console, setConsole] = useState('console');
     const exampleSecondaryButtonProps: IButtonProps = React.useMemo(
@@ -60,7 +61,9 @@ export const AgendaPlanner: React.FunctionComponent<IButtonExampleProps> = (prop
     */
 
     return (
-        <div>
+        <div style={{backgroundColor: NeutralColors.gray10,
+        padding: 10,
+        }}>
             <ProgressBar/>
             <Stack horizontal wrap tokens={stackTokens}>
                 <DefaultButton

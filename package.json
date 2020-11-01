@@ -29,11 +29,18 @@
   "dependencies": {
     "@fluentui/react": "^7.147.1",
     "@fluentui/theme": "^1.5.4",
+    "@reduxjs/toolkit": "^1.4.0",
     "core-js": "^3.1.4",
     "es6-promise": "^4.2.8",
     "office-ui-fabric-react": "^7.10.0",
     "react": "^16.8.2",
-    "react-dom": "^16.8.2"
+    "react-dom": "^16.8.2",
+    "react-redux": "^7.2.2",
+    "redux": "^4.0.5",
+    "redux-devtools-extension": "^2.13.8",
+    "redux-starter-kit": "^2.0.0",
+    "redux-thunk": "^2.3.0",
+    "uuid": "^8.3.1"
   },
   "devDependencies": {
     "@babel/core": "^7.10.2",
@@ -45,6 +52,8 @@
     "@types/react": "^16.8.22",
     "@types/react-dom": "^16.8.4",
     "@types/react-hot-loader": "^4.1.0",
+    "@types/react-redux": "^7.1.9",
+    "@types/redux": "^3.6.0",
     "@types/webpack": "^4.4.34",
     "@types/webpack-dev-server": "^3.1.6",
     "babel-loader": "^8.1.0",
