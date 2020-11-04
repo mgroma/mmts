@@ -13,12 +13,12 @@ export const Main: React.FunctionComponent = () => {
     }
     return (
         <Pivot style={style}>
+            <PivotItem headerText="Meeting Host" itemIcon="Group">
+                <TodoApp />
+            </PivotItem>
             <PivotItem headerText="Agenda Planner" itemCount={23} itemIcon="Recent">
                 <AgendaPlanner/>
                 <PeopleSearch/>
-            </PivotItem>
-            <PivotItem headerText="Meeting Host" itemIcon="Group">
-                <TodoApp />
             </PivotItem>
             <PivotItem headerText="Action Items" itemIcon="ReminderGroup">
                 <Label>Meeting host stuff</Label>

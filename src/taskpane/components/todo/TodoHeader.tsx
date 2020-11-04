@@ -1,78 +1,93 @@
 import * as React from 'react';
-import { Stack, Text, Pivot, PivotItem, TextField, PrimaryButton } from 'office-ui-fabric-react';
-import { FilterTypes } from './store';
-import { actions } from './actions';
-import { connect } from 'react-redux';
+import {Stack, Text, Pivot, PivotItem, TextField, PrimaryButton, DefaultButton} from 'office-ui-fabric-react';
+import {FilterTypes} from './store';
+import {actions} from './actions';
+import {connect} from 'react-redux';
 
 interface TodoHeaderProps {
-  addTodo: (label: string) => void;
-  setFilter: (filter: FilterTypes) => void;
+    addTodo: (label: string) => void;
+    setFilter: (filter: FilterTypes) => void;
 }
 
 interface TodoHeaderState {
-  labelInput: string;
+    labelInput: string;
 }
 
 class TodoHeader extends React.Component<TodoHeaderProps, TodoHeaderState> {
-  constructor(props: TodoHeaderProps) {
-    super(props);
-    this.state = { labelInput: undefined };
-  }
+    constructor(props: TodoHeaderProps) {
+        super(props);
+        this.state = {labelInput: undefined};
+    }
 
-  render() {
-    return (
-      <Stack gap={10}>
-        <Stack horizontal horizontalAlign="center">
-          <Text variant="xxLarge">todos <Text variant="mediumPlus">(2.6 demo)</Text></Text>
-        </Stack>
+    render() {
+        return (
+            <Stack gap={10} padding={20}>
+                <Stack horizontal gap={10}>
+                    <Stack.Item grow>
+                        <TextField
+                            placeholder="What needs to be done?"
+                            value={this.state.labelInput}
+                        />
+                    </Stack.Item>
+                    <Stack.Item>
+                        <TextField
+                            placeholder="What should be done?"
+                            value={this.state.labelInput}
+                        />
+                    </Stack.Item>
+                    <DefaultButton>Darek</DefaultButton>
+                </Stack>
+                <Stack horizontal horizontalAlign="center">
+                    <Text variant="xxLarge">todos <Text variant="mediumPlus">(2.6 demo)</Text></Text>
+                </Stack>
 
-        <Stack horizontal gap={10}>
-          <Stack.Item grow>
-            <TextField
-              placeholder="What needs to be done?"
-              value={this.state.labelInput}
-              onChange={this.onChange}
-              styles={props => ({
-                ...(props.focused && {
-                  field: {
-                    backgroundColor: '#c7e0f4'
-                  }
-                })
-              })}
-            />
-          </Stack.Item>
-          <PrimaryButton onClick={this.onAdd}>Add</PrimaryButton>
-        </Stack>
+                <Stack horizontal gap={10}>
+                    <Stack.Item grow>
+                        <TextField
+                            placeholder="What needs to be done?"
+                            value={this.state.labelInput}
+                            onChange={this.onChange}
+                            styles={props => ({
+                                ...(props.focused && {
+                                    field: {
+                                        backgroundColor: '#c7e0f4'
+                                    }
+                                })
+                            })}
+                        />
+                    </Stack.Item>
+                    <PrimaryButton onClick={this.onAdd}>Add</PrimaryButton>
+                </Stack>
 
-        <Pivot onLinkClick={this.onFilter}>
-          <PivotItem headerText="all" />
-          <PivotItem headerText="active" />
-          <PivotItem headerText="completed" />
-        </Pivot>
-      </Stack>
-    );
-  }
+                <Pivot onLinkClick={this.onFilter}>
+                    <PivotItem headerText="all"/>
+                    <PivotItem headerText="active"/>
+                    <PivotItem headerText="completed"/>
+                </Pivot>
+            </Stack>
+        );
+    }
 
-  private onAdd = () => {
-    this.props.addTodo(this.state.labelInput);
-    this.setState({ labelInput: undefined });
-  };
+    private onAdd = () => {
+        this.props.addTodo(this.state.labelInput);
+        this.setState({labelInput: undefined});
+    };
 
-  private onChange = (evt: React.FormEvent<HTMLInputElement>, newValue: string) => {
-    this.setState({ labelInput: newValue });
-  };
+    private onChange = (evt: React.FormEvent<HTMLInputElement>, newValue: string) => {
+        this.setState({labelInput: newValue});
+    };
 
-  private onFilter = (item: PivotItem) => {
-    this.props.setFilter(item.props.headerText as FilterTypes);
-  };
+    private onFilter = (item: PivotItem) => {
+        this.props.setFilter(item.props.headerText as FilterTypes);
+    };
 }
 
 const ConnectedTodoHeader = connect(
-  state => ({}),
-  dispatch => ({
-    addTodo: label => dispatch(actions.addTodo(label)),
-    setFilter: filter => dispatch(actions.setFilter(filter))
-  })
+    state => ({}),
+    dispatch => ({
+        addTodo: label => dispatch(actions.addTodo(label)),
+        setFilter: filter => dispatch(actions.setFilter(filter))
+    })
 )(TodoHeader);
 
-export { ConnectedTodoHeader as TodoHeader };
+export {ConnectedTodoHeader as TodoHeader};

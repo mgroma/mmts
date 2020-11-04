@@ -6,8 +6,10 @@ import { TodoList } from './TodoList';
 
 export const TodoApp = () => {
   return (
-    <Stack horizontalAlign="center">
-      <Stack style={{ width: 400 }} gap={25}>
+    <Stack>
+    {/*<Stack horizontalAlign="center">*/}
+      <Stack gap={25}>
+      {/*<Stack style={{ width: 400 }} gap={25}>*/}
         <TodoHeader />
         <TodoList />
         <TodoFooter />
