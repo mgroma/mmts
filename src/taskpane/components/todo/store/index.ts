@@ -6,9 +6,9 @@ export interface TodoItem {
 }
 
 export interface Store {
+  items: TodoItem[],
   todos: {
     [id: string]: TodoItem;
   };
-
   filter: FilterTypes;
 }

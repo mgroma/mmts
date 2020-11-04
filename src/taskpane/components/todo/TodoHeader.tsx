@@ -23,19 +23,21 @@ class TodoHeader extends React.Component<TodoHeaderProps, TodoHeaderState> {
         return (
             <Stack gap={10} padding={20}>
                 <Stack horizontal gap={10}>
-                    <Stack.Item grow>
+                    <Stack.Item grow={1}>
                         <TextField
                             placeholder="What needs to be done?"
                             value={this.state.labelInput}
                         />
                     </Stack.Item>
-                    <Stack.Item>
+                    <Stack.Item grow={3}>
                         <TextField
                             placeholder="What should be done?"
                             value={this.state.labelInput}
                         />
                     </Stack.Item>
-                    <DefaultButton>Darek</DefaultButton>
+                    <Stack.Item grow>
+                        <DefaultButton>Darek</DefaultButton>
+                    </Stack.Item>
                 </Stack>
                 <Stack horizontal horizontalAlign="center">
                     <Text variant="xxLarge">todos <Text variant="mediumPlus">(2.6 demo)</Text></Text>

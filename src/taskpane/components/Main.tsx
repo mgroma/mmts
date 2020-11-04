@@ -1,8 +1,9 @@
 import * as React from 'react';
 import {PeopleSearch} from "./PeopleSearch/PeopleSearch";
-import {IconButton, Label, Pivot, PivotItem} from "office-ui-fabric-react";
+import {IconButton, Label, Pivot, PivotItem, Stack} from "office-ui-fabric-react";
 import {AgendaPlanner} from "./AgendaPlanner";
 import {TodoApp} from "./todo/TodoApp";
+import {MyTodoApp} from "./todo/MyTodoApp";
 //https://codesandbox.io/embed/y0o9o2815v - great
 // https://developer.microsoft.com/en-us/fluentui#/controls/web/pivot
 export const Main: React.FunctionComponent = () => {
@@ -21,6 +22,7 @@ export const Main: React.FunctionComponent = () => {
                 <PeopleSearch/>
             </PivotItem>
             <PivotItem headerText="Action Items" itemIcon="ReminderGroup">
+                <MyTodoApp />
                 <Label>Meeting host stuff</Label>
                 <IconButton iconProps={{iconName: 'Emoji2'}}/>
             </PivotItem>

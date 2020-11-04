@@ -3,6 +3,7 @@ import { Stack } from 'office-ui-fabric-react';
 import { TodoFooter } from './TodoFooter';
 import { TodoHeader } from './TodoHeader';
 import { TodoList } from './TodoList';
+import {MyTodoApp} from "./MyTodoApp";
 
 export const TodoApp = () => {
   return (
